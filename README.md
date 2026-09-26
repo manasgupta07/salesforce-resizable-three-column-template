@@ -1,6 +1,8 @@
 # salesforce-resizable-three-column-template
 A custom resizable three-column record page template for Salesforce Service Console UI.
 
+https://github.com/user-attachments/assets/2d69eb0e-dd02-458b-a99b-53c922bb502f
+
 # Resizable Three-Column Record Template
 
 A customized Aura-based Lightning Page template designed to optimize the Salesforce Service Console UI. This component introduces a dynamic, three-column record layout where users can manually adjust the width of each column on the fly by dragging the column dividers. 
