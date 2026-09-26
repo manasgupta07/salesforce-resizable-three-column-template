@@ -1,0 +1,65 @@
+<aura:component implements="lightning:recordHomeTemplate"
+                description="Full-width header above three resizable columns. Drag a divider to resize; click to collapse. State persists per user per browser.">
+
+    <aura:attribute name="header" type="Aura.Component[]" description="Full-width region for Highlights Panel, Path, Chatter tabs, etc." />
+    <aura:attribute name="left"   type="Aura.Component[]" description="Left column" />
+    <aura:attribute name="center" type="Aura.Component[]" description="Center column" />
+    <aura:attribute name="right"  type="Aura.Component[]" description="Right column" />
+
+    <aura:attribute name="widths"         type="Object"  access="private" default="{ 'left': 25, 'center': 50, 'right': 25 }" />
+    <aura:attribute name="leftCollapsed"  type="Boolean" access="private" default="false" />
+    <aura:attribute name="rightCollapsed" type="Boolean" access="private" default="false" />
+    <aura:attribute name="restore"        type="Object"  access="private" default="{ 'left': 25, 'right': 25 }" />
+
+    <aura:handler name="init"    value="{!this}" action="{!c.doInit}" />
+    <aura:handler name="destroy" value="{!this}" action="{!c.doDestroy}" />
+
+    <div class="template-root">
+        <div class="drag-shield" aura:id="shield"></div>
+
+        <div class="header-region">
+            {!v.header}
+        </div>
+
+        <div class="resizable-container" aura:id="container">
+
+            <div class="{! v.leftCollapsed ? 'column column_collapsed' : 'column' }" aura:id="leftCol">
+                {!v.left}
+            </div>
+
+            <div class="{! v.leftCollapsed ? 'divider divider_collapsed' : 'divider' }"
+                 aura:id="leftDivider"
+                 tabindex="0"
+                 onmousedown="{!c.startResizeLeft}"
+                 onkeydown="{!c.handleLeftKey}">
+                <div class="divider__handle">
+                    <span class="divider__chevron" aria-hidden="true">{! v.leftCollapsed ? '&#8250;' : '&#8249;' }</span>
+                    <span class="divider__label">{! v.leftCollapsed ? 'Show left sidebar' : 'Hide left sidebar' }</span>
+                    <span class="divider__grip" aria-hidden="true"></span>
+                </div>
+            </div>
+
+            <div class="column" aura:id="centerCol">
+                {!v.center}
+            </div>
+
+            <div class="{! v.rightCollapsed ? 'divider divider_collapsed' : 'divider' }"
+                 aura:id="rightDivider"
+                 tabindex="0"
+                 onmousedown="{!c.startResizeRight}"
+                 onkeydown="{!c.handleRightKey}">
+                <div class="divider__handle">
+                    <span class="divider__chevron" aria-hidden="true">{! v.rightCollapsed ? '&#8249;' : '&#8250;' }</span>
+                    <span class="divider__label">{! v.rightCollapsed ? 'Show right sidebar' : 'Hide right sidebar' }</span>
+                    <span class="divider__grip" aria-hidden="true"></span>
+                </div>
+            </div>
+
+            <div class="{! v.rightCollapsed ? 'column column_collapsed' : 'column' }" aura:id="rightCol">
+                {!v.right}
+            </div>
+
+        </div>
+    </div>
+
+</aura:component>
